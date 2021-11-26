@@ -18,6 +18,8 @@ dht DHT; // opretter et objekt som udnytter dht library
 int templimt = 30;
 int humiditylimt = 55;
 
+int humidity, temp;
+
 int adc;
 int dB;
 
@@ -49,6 +51,7 @@ void setup()
 
     // Start serial monitor/plotter
     Serial.begin(9600);
+    link.begin(9600);
 }
 
 void loop()
@@ -89,6 +92,7 @@ void checkTnH()
     // Hvis chk er værdien 0 så udskriver den de følgende data'er i "if statement'et"
     if (chk == 0)
     {
+        temp = DHT.temperature;
         // prints our Temp every 2 secs
         Serial.print("\nTemperature = ");
         Serial.println(DHT.temperature);
@@ -96,6 +100,7 @@ void checkTnH()
 
         Serial.print("\n");
         // Prints our humidity every 2 secs
+        humidity = DHT.humidity;
         Serial.print("Humidity = ");
         Serial.println(DHT.humidity);
         checklimts(1);
@@ -165,8 +170,6 @@ void alert(bool shouldbuzz)
         tone(SOUND_BUZZER, 500, 500);
     }
 }
-
-// your loop-limited stuff here
 
 void checkSound()
 {
