@@ -51,7 +51,6 @@ void setup()
 
     // Start serial monitor/plotter
     Serial.begin(9600);
-    link.begin(9600);
 }
 
 void loop()
